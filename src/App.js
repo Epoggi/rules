@@ -5,6 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { FixedSizeList } from 'react-window';
+import PropTypes from 'prop-types';
 
 function parseRules(data) {
   const regexRules = /^(\d+\.\d+[\w]?[\.]?)\s(.*)/gmi;
@@ -84,14 +85,20 @@ function App() {
 
   
   function renderRow(props) {
-    const { number, text } = props;
-
+    const { index, style } = props;
+  
     return (
-      <ListItem button key={number}>
-        <ListItemText primary={number + " " + text}/>
-      </ListItem>
-    );
+
+        <ListItem button style={style} key={index}>
+          <ListItemText primary={chapters[index].number + " " + chapters[index].text} />
+        </ListItem>
+      
+      );
   }
+  renderRow.propTypes = {
+    index: PropTypes.number.isRequired,
+    style: PropTypes.object.isRequired,
+  };
 
   //Possible returns
   if (error) {
@@ -101,7 +108,7 @@ function App() {
   } else {
     return (
       <div>
-        <FixedSizeList height={300} width={200} itemSize={30} itemCount={10}>
+        <FixedSizeList height={300} width={300} itemSize={35} itemCount={chapters.length}>
           {renderRow}
         </FixedSizeList>
         <Grid container spacing={3}>
