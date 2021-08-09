@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, createRef } from 'react';
 import './App.css';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { FixedSizeList } from 'react-window';
+import { FixedSizeList, VariableSizeList } from 'react-window';
 import PropTypes from 'prop-types';
 
+
+//Parsing
 function parseRules(data) {
   const regexRules = /^(\d+\.\d+[\w]?[\.]?)\s(.*)/gmi;
   var matches = [];
@@ -18,17 +20,17 @@ function parseRules(data) {
   return matches;
 }
 function parseChapters(data) {
-const regexChapters = /^\r\n(\d+)\.\s(.*)\r\n$/gm;
-var matches = [];
-var match = regexChapters.exec(data);
-while (match != null) {
-  matches.push({ number: match[1], text: match[2]});
-  match = regexChapters.exec(data);
-}
-return matches
+  const regexChapters = /^\r\n(\d+)\.\s(.*)\r\n$/gm;
+  var matches = [];
+  var match = regexChapters.exec(data);
+  while (match != null) {
+    matches.push({ number: match[1], text: match[2] });
+    match = regexChapters.exec(data);
+  }
+  return matches
 }
 async function fetchData() {
-  
+
 }
 
 
@@ -56,9 +58,10 @@ function App() {
           setError(error);
         }
       )
-      //After states are filled, mix the chapters and rules into a single list
+    //After states are filled, mix the chapters and rules into a single list
   }, [])
 
+  //Need to study more on async code
   useEffect(() => {
     if (chapters.length > 0) {
       chaptersAndRules(chapters, rules)
@@ -66,16 +69,16 @@ function App() {
 
   }, [chapters, rules])
 
+  //Mix them up for the second list
   const chaptersAndRules = (chapters, rules) => {
-    console.log("first chapter: " + chapters[0])
-    console.log("first rule: " + rules[0])
+
     var mixed = [];
     for (var i = 0; i < chapters.length; i++) {
       mixed.push(chapters[i])
-  
-      for (var i2 = 0; i2 < rules.length; i2++){
-        
-        if (chapters[i].number == rules[i2].number.slice(0,3)) {
+
+      for (var i2 = 0; i2 < rules.length; i2++) {
+
+        if (chapters[i].number == rules[i2].number.slice(0, 3)) {
           mixed.push(rules[i2])
         }
       }
@@ -83,22 +86,79 @@ function App() {
     setMixed(mixed)
   }
 
-  
+  // Function to scroll the list according to user
+  const listRef = createRef();
+  const scrollList = (item) => {
+    this.listRef.current.scrollToItem(item, "center");
+  }
+
+  //Note: How to create row function with variable data?
   function renderRow(props) {
     const { index, style } = props;
-  
+
     return (
 
-        <ListItem button style={style} key={index}>
-          <ListItemText primary={chapters[index].number + " " + chapters[index].text} />
-        </ListItem>
+      <ListItem button
+        style={style}
+        key={index}
+        /* onClick={scrollList(this.object.number)} */>
+        <ListItemText primary={chapters[index].number + " " + chapters[index].text} />
+      </ListItem>
+
+    );
+  }
+  /* Underwork, for varying row sizes on rules
+  //References
+    const listRef = useRef({});
+    const rowHeigts = useRef({});
+  
+    function getRowHeight(index) {
+      return rowHeigts.current[index] + 8 || 82;
+    }
+  
+    function renderRow2(props) {
+      const { index, style } = props;
+      const rowRef = useRef({});
+  
+      useEffect(() => {
+        if (rowRef.current) {
+          setRowHeigts(index, rowRef.current.clientHeight);
+        }
+      }, [rowRef]);
       
-      );
+      return (
+  
+          <ListItem button style={style} key={index}>
+            <ListItemText primary={mixed[index].number + " " + mixed[index].text} />
+          </ListItem>
+        
+        );
+    } */
+
+  //rows for mixed list of chapters and rules
+  function renderRow2(props) {
+    const { index, style } = props;
+
+    return (
+
+      <ListItem button style={style} key={index}>
+        <ListItemText primary={mixed[index].number + " " + mixed[index].text} />
+      </ListItem>
+
+    );
   }
   renderRow.propTypes = {
     index: PropTypes.number.isRequired,
     style: PropTypes.object.isRequired,
   };
+  //Function underwork, for rules of varying sizes.
+  const getItemSize = index => {
+    //return a size for items[index]
+    //if method: if item[index].text.length > x (return y); else if..
+    //if (item[index].text.length < 15) { return 10} else if (item[index].text.length < 35) {return 30} ...
+    //suggestions?
+  }
+
 
   //Possible returns
   if (error) {
@@ -108,31 +168,30 @@ function App() {
   } else {
     return (
       <div>
-        <FixedSizeList height={300} width={300} itemSize={35} itemCount={chapters.length}>
-          {renderRow}
-        </FixedSizeList>
         <Grid container spacing={3}>
-          <Grid item xs={6}>
-        <p>Chapters</p>
-        <List>
-      {chapters.map(item=> (
-            <ListItem key={item.number}>
-              {item.number} {item.text}
-            </ListItem>
-          ))}
-        </List>
+          <Grid item xs={3}>
+            <p>Table of Contents</p>
+            <FixedSizeList height={600} width='100%' itemSize={35} itemCount={chapters.length}>
+              {renderRow}
+            </FixedSizeList>
           </Grid>
-          <Grid item xs={6}>
-        <p>Rules</p>
-        <List>
-      {mixed.map(item=> (
-            <ListItem key={item.number}>
-              {item.number} {item.text}
-            </ListItem>
-          ))}
-        </List>
+          <Grid item xs={9}>
+
+            <p>Chapters and Rules</p>
+            <FixedSizeList
+              height={600}
+              width='100%'
+              itemSize={80}
+              itemCount={mixed.length}
+              /* ref={this.listRef} */>
+
+              {renderRow2}
+            </FixedSizeList>
           </Grid>
         </Grid>
+        {/*  <VariableSizeList height={600} width='100%' itemSize={getItemSize} itemCount={mixed.length}>
+          {renderRow2}
+        </VariableSizeList> */}
       </div>
     )
   }
