@@ -29,9 +29,6 @@ function parseChapters(data) {
   }
   return matches
 }
-async function fetchData() {
-
-}
 
 
 function App() {
@@ -41,6 +38,7 @@ function App() {
   const [chapters, setChapters] = useState([]);
   const [rules, setRules] = useState([]);
   const [mixed, setMixed] = useState([]);
+  const [display, setDisplay] = useState([]);
 
   //Fetch the rules.txt need to ask permission at "https://cors-anywhere.herokuapp.com/corsdemo"
   useEffect(() => {
@@ -58,18 +56,19 @@ function App() {
           setError(error);
         }
       )
-    //After states are filled, mix the chapters and rules into a single list
   }, [])
-
-  //Need to study more on async code
+  
+  //Mix chapters and rules into another list
+  //Note: Need to study more on async code
   useEffect(() => {
     if (chapters.length > 0) {
       chaptersAndRules(chapters, rules)
+      setDisplay(rules)
     }
 
   }, [chapters, rules])
 
-  //Mix them up for the second list
+  //Function to mix the lists
   const chaptersAndRules = (chapters, rules) => {
 
     var mixed = [];
@@ -85,6 +84,11 @@ function App() {
     }
     setMixed(mixed)
   }
+  const filterChapter = (number) => {
+    console.log("Errorlol")
+    setDisplay(rules.filter(rules => rules.number.slice(0, 3) == number))
+  }
+
 
   // Function to scroll the list according to user
   const listRef = createRef();
@@ -101,7 +105,7 @@ function App() {
       <ListItem button
         style={style}
         key={index}
-        /* onClick={scrollList(this.object.number)} */>
+        onClick={() => filterChapter(chapters[index].number)}>
         <ListItemText primary={chapters[index].number + " " + chapters[index].text} />
       </ListItem>
 
@@ -112,6 +116,7 @@ function App() {
     const listRef = useRef({});
     const rowHeigts = useRef({});
   
+  //Evaluate row size according to item[index].text.length
     function getRowHeight(index) {
       return rowHeigts.current[index] + 8 || 82;
     }
@@ -142,7 +147,7 @@ function App() {
     return (
 
       <ListItem button style={style} key={index}>
-        <ListItemText primary={mixed[index].number + " " + mixed[index].text} />
+        <ListItemText primary={display[index].number + " " + display[index].text} />
       </ListItem>
 
     );
@@ -177,12 +182,12 @@ function App() {
           </Grid>
           <Grid item xs={9}>
 
-            <p>Chapters and Rules</p>
+            <p>Rules</p>
             <FixedSizeList
               height={600}
               width='100%'
               itemSize={80}
-              itemCount={mixed.length}
+              itemCount={display.length}
               /* ref={this.listRef} */>
 
               {renderRow2}
