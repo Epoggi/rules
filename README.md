@@ -28,15 +28,29 @@ Source: https://www.reaktor.com/junior-dev-assignment-2021/
 2. Load the input data rules.txt dynamically and provide a UI for specifying an alternative file by URL
 
 ## Underconstrution
-1. Hyperlinks to scroll content list via table of contents list
-2. Have code work through Heroku
-3. Search box for keywords
-4. VariableSizeList: To have the item size of rules list change according to rules information length
+1. ~~Hyperlinks to scroll content list via table of contents list~~
+2. Search box for keywords
+3. Have code work through Heroku
+4. ~~VariableSizeList: To have the item size of rules list change according to rules information length~~ Obsolete
 
-## Current progress 09.08.2021
+## progress 10.08.2021
+co-programming with []() [Sérgio Isidoro (Github link)](https://github.com/sergioisidoro)
+
+- Scrapped react window and learned a lot about component usage
+- Rules list changes according to selected chapter
+
+## progress 09.08.2021
 
 ![image](https://user-images.githubusercontent.com/11327084/128690461-d4702540-750e-4f48-9633-24b58e3b7708.png)
 
 ## Used components
 FixedSizeList / VariableSizeList: https://github.com/bvaughn/react-window
 others: Material-ui: Grid and other list elements.
+
+### Co-Programming
+Sérgio is a great friend and a brilliant teacher, with him I've learned a lot and I'm priviledged to have tutoring from him, thank you very much.
+
+He helped me understand:
+- React component coding
+- Regex
+- Tools like Regex101
