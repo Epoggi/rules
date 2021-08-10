@@ -34,8 +34,7 @@ Source: https://www.reaktor.com/junior-dev-assignment-2021/
 4. ~~VariableSizeList: To have the item size of rules list change according to rules information length~~ Obsolete
 
 ## progress 10.08.2021
-co-programming with []() [Sérgio Isidoro (Github link)](https://github.com/sergioisidoro)
-
+co-programming with Sérgio
 - Scrapped react window and learned a lot about component usage
 - Rules list changes according to selected chapter
 - Major code remodeling
@@ -44,12 +43,9 @@ co-programming with []() [Sérgio Isidoro (Github link)](https://github.com/serg
 
 ![image](https://user-images.githubusercontent.com/11327084/128690461-d4702540-750e-4f48-9633-24b58e3b7708.png)
 
-## Used components
-FixedSizeList / VariableSizeList: https://github.com/bvaughn/react-window
-others: Material-ui: Grid and other list elements.
-
 ### Co-Programming
-Sérgio is a great friend and a brilliant teacher, with him I've learned a lot and I'm priviledged to have tutoring from him, thank you very much.
+[]() [Sérgio Isidoro (Github link)](https://github.com/sergioisidoro)
+ is a great friend and a brilliant teacher, with him I've learned a lot and I'm priviledged to have tutoring from him, thank you very much.
 
 He helped me understand:
 - React component coding
