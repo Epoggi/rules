@@ -38,6 +38,7 @@ co-programming with []() [Sérgio Isidoro (Github link)](https://github.com/serg
 
 - Scrapped react window and learned a lot about component usage
 - Rules list changes according to selected chapter
+- Major code remodeling
 
 ## progress 09.08.2021
 
