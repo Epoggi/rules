@@ -29,6 +29,7 @@ Source: https://www.reaktor.com/junior-dev-assignment-2021/
 ## Underconstrution
 1. Hyperlinks to scroll content list via table of contents list
 2. Search box for keywords
+3. VariableSizeList: To have the item size of rules list change according to rules information length
 
 ## Current progress 09.08.2021
 
