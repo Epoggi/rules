@@ -1,5 +1,6 @@
 # Personal skill level evaluation via Reaktor pre-assignment
 In short: Create a web front for Magic The Gathering rules.txt
+
 Source: https://www.reaktor.com/junior-dev-assignment-2021/
 
 ## Goals
