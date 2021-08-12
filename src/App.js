@@ -71,8 +71,8 @@ function App() {
     }
 
     return (
-      <div style={{ height: '100vh', overflow: 'auto' }} >
-        <p>Table of Contents</p>
+      <div style={{ height: '93vh', overflow: 'auto' }} >
+        <p style={{paddingLeft:15}}>Table of Contents</p>
         <List>
           {chapters.map(chapter => <Chapter chapter={chapter} key={chapter.number} />)}
         </List>
@@ -115,7 +115,7 @@ function App() {
     }
     return (
       <div style={{ height: '100vh', overflow: 'auto' }} >
-        <p>Rules</p>
+        <p style={{paddingLeft:15}}>Rules</p>
         <List>
           {rules.map(rule => <Rule rule={rule} key={rule.number} />)}
         </List>
@@ -145,7 +145,9 @@ function App() {
       <div>
         <Grid container spacing={0}>
           <Grid item xs={3}>
-            <form onSubmit={e => { e.preventDefault(); }}>
+            <form onSubmit={e => { e.preventDefault(); }}
+               style={{paddingTop:10, paddingLeft:15}}
+            >
               <TextField
                 value={value}
                 onChange={handleChange}
