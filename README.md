@@ -36,8 +36,8 @@ Source: https://www.reaktor.com/junior-dev-assignment-2021/
 ## progress 12.08.2021
 - Search box with filter.includes
 - Little styling
-![image](https://user-images.githubusercontent.com/11327084/129183679-75af205d-2509-431d-a31e-fa012eee223e.png)
 
+![image](https://user-images.githubusercontent.com/11327084/129183937-aa2643fb-9872-46da-abf2-a7914f62ef22.png)
 
 ## progress 10.08.2021
 co-programming with Sérgio
