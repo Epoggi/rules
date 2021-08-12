@@ -57,3 +57,6 @@ He helped me understand:
 - React component coding
 - Regex
 - Tools like Regex101
+
+### Project created with
+- React & Material-ui
