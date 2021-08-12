@@ -5,11 +5,12 @@ import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import TextField from '@material-ui/core/TextField';
+import PropTypes from 'prop-types';
 
 //Parsing
 function parseRules(data) {
-  const regexRules = /^(\d+\.\d+[\w]?[\.]?)\s(.*)/gmi;
+  const regexRules = /^(\d+\.\d+[\w]?[.]?)\s(.*)/gmi;
   var matches = [];
   var match = regexRules.exec(data);
   while (match != null) {
@@ -18,6 +19,7 @@ function parseRules(data) {
   }
   return matches;
 }
+
 function parseChapters(data) {
   const regexChapters = /^\r\n(\d+)\.\s(.*)\r\n$/gm;
   var matches = [];
@@ -56,23 +58,18 @@ function App() {
       )
   }, [])
 
+//Setting up display state
   useEffect(() => {
-      setDisplay(rules)
+    setDisplay(rules)
   }, [rules])
 
-  const filterChapter = (number) => {
-    setDisplay(rules.filter(rules => rules.number.slice(0, 3) == number))
-  }
-
-  const Chapter = ({ chapter }) => {
-    return (
-      <ListItem button 
-      onClick={() => filterChapter(chapter.number)}>
-        <ListItemText primary={chapter.number + " " + chapter.text} /></ListItem>
-    )
-  }
-
+  
+//Chapter components
   const TableOfContents = ({ chapters }) => {
+    TableOfContents.propTypes = {
+      chapters: PropTypes.array
+    }
+
     return (
       <div style={{ height: '100vh', overflow: 'auto' }} >
         <p>Table of Contents</p>
@@ -83,7 +80,28 @@ function App() {
     )
   }
 
+  const Chapter = ({ chapter }) => {
+    Chapter.propTypes = {
+      chapter: PropTypes.object
+    }
+    return (
+      <ListItem button
+        onClick={() => filterChapter(chapter.number)}>
+        <ListItemText primary={chapter.number + " " + chapter.text} /></ListItem>
+    )
+  }
+
+//Filtering the rules according to ToC
+  const filterChapter = (number) => {
+    setDisplay(rules.filter(rules => rules.number.slice(0, 3) == number))
+  }
+
+  
+//Rule components
   const Rule = ({ rule }) => {
+    Rule.propTypes = {
+      rule: PropTypes.object
+    }
     return (
       <ListItem>
         <ListItemText primary={rule.number + " " + rule.text} />
@@ -92,6 +110,9 @@ function App() {
   }
 
   const ListOfRules = ({ rules }) => {
+    ListOfRules.propTypes = {
+      rules: PropTypes.array
+    }
     return (
       <div style={{ height: '100vh', overflow: 'auto' }} >
         <p>Rules</p>
@@ -102,8 +123,19 @@ function App() {
     )
   }
 
+//Search components
+  const [value, setValue] = useState('');
 
-  //Possible returns
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    searchFilter()
+  }
+
+  const searchFilter = () => {
+    setDisplay(rules.filter(rules => rules.text.toLowerCase().includes(value.toLowerCase())))
+  }
+
+//Possible returns
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
@@ -113,13 +145,22 @@ function App() {
       <div>
         <Grid container spacing={0}>
           <Grid item xs={3}>
+            <form onSubmit={e => { e.preventDefault(); }}>
+              <TextField
+                value={value}
+                onChange={handleChange}
+                variant="outlined"
+                label="Search Rules"
+                placeholder="For example 'Command'"
+                size="small">
+              </TextField>
+            </form>
             <TableOfContents chapters={chapters} />
           </Grid>
           <Grid item xs={9}>
             <ListOfRules rules={display} />
           </Grid>
         </Grid>
-
       </div>
     )
   }
