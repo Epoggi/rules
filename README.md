@@ -29,9 +29,15 @@ Source: https://www.reaktor.com/junior-dev-assignment-2021/
 
 ## Underconstrution
 1. ~~Hyperlinks to scroll content list via table of contents list~~
-2. Search box for keywords
+2. ~~Search box for keywords~~
 3. Have code work through Heroku
 4. ~~VariableSizeList: To have the item size of rules list change according to rules information length~~ Obsolete
+
+## progress 12.08.2021
+- Search box with filter.includes
+- Little styling
+![image](https://user-images.githubusercontent.com/11327084/129183679-75af205d-2509-431d-a31e-fa012eee223e.png)
+
 
 ## progress 10.08.2021
 co-programming with Sérgio
