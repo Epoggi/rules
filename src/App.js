@@ -39,17 +39,18 @@ function App() {
   const [chapters, setChapters] = useState([]);
   const [rules, setRules] = useState([]);
   const [display, setDisplay] = useState([]);
+  const fileurl = 'mgtrules.txt'
 
   //Fetch the rules.txt need to ask permission at "https://cors-anywhere.herokuapp.com/corsdemo"
   useEffect(() => {
-    fetch(`https://cors-anywhere.herokuapp.com/https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt`)
-      .then(res => res.text())
-      .then(
-        (fetchData) => {
+    //fetch(`https://cors-anywhere.herokuapp.com/https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt`)
+    fetch(fileurl)
+    .then(res => res.text())
+      .then( text => {
           setIsLoaded(true);
           //rules and chapters, through parsing functions with their own regex's, separate relevant information from .text
-          setRules(parseRules(fetchData));
-          setChapters(parseChapters(fetchData));
+          setRules(parseRules(text));
+          setChapters(parseChapters(text));
         },
         (error) => {
           setIsLoaded(true);
