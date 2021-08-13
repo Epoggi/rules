@@ -22,7 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# mgt rules
+# mgt rules, so much trouble here.
 
 .mgtrules.tx
 mgtrules
