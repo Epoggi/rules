@@ -24,5 +24,4 @@ yarn-error.log*
 
 # mgt rules
 
-/public/mgtrules.txt
-/public
+mgtrules.tx
