@@ -1,5 +1,9 @@
 # Personal skill level evaluation via Reaktor pre-assignment
+## Finished
 In short: Create a web front for Magic The Gathering rules.txt
+
+
+[]() [Heroku link](https://mgtrules.herokuapp.com/)
 
 Source: https://www.reaktor.com/junior-dev-assignment-2021/
 
@@ -30,8 +34,13 @@ Source: https://www.reaktor.com/junior-dev-assignment-2021/
 ## Underconstrution
 1. ~~Hyperlinks to scroll content list via table of contents list~~
 2. ~~Search box for keywords~~
-3. Have code work through Heroku
+3. ~~Have code work through Heroku~~
 4. ~~VariableSizeList: To have the item size of rules list change according to rules information length~~ Obsolete
+
+## Finished 13.08.2021
+- Build Heroku Procfile
+- gitignore source file
+- Deploy to Heroku successful
 
 ## progress 12.08.2021
 - Search box with filter.includes
@@ -60,3 +69,9 @@ He helped me understand:
 
 ### Project created with
 - React & Material-ui
+
+### Learnings
+- From school I've learned various coding basics, including react and more precisely using componnents and for example taking user input in a controlled way
+- Through this project I've learned: Regex, Tools, Debugging, Clean code, Component coding, Heroku Procfile.. 
+
+Thank you very much.
