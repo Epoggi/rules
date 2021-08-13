@@ -39,6 +39,7 @@ function App() {
   const [chapters, setChapters] = useState([]);
   const [rules, setRules] = useState([]);
   const [display, setDisplay] = useState([]);
+  const [selected, setSelected] = useState(1);
   const fileurl = 'mgtrules.txt'
 
   //Fetch the rules.txt need to ask permission at "https://cors-anywhere.herokuapp.com/corsdemo"
@@ -87,13 +88,15 @@ function App() {
     }
     return (
       <ListItem button
-        onClick={() => filterChapter(chapter.number)}>
+        onClick={() => filterChapter(chapter.number)}
+        selected={selected === chapter.number}>
         <ListItemText primary={chapter.number + " " + chapter.text} /></ListItem>
     )
   }
 
 //Filtering the rules according to ToC
   const filterChapter = (number) => {
+    setSelected(number)
     setDisplay(rules.filter(rules => rules.number.slice(0, 3) == number))
   }
 
