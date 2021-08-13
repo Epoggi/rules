@@ -25,3 +25,6 @@ yarn-error.log*
 # mgt rules
 
 .mgtrules.tx
+mgtrules
+mgtrules.tx
+
