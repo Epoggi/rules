@@ -2,6 +2,7 @@
 ## Finished
 In short: Create a web front for Magic The Gathering rules.txt
 
+Still trying to fix the search (it's slow)
 
 []() [Heroku link](https://mgtrules.herokuapp.com/)
 
@@ -41,6 +42,8 @@ Source: https://www.reaktor.com/junior-dev-assignment-2021/
 - Build Heroku Procfile
 - gitignore source file
 - Deploy to Heroku successful
+- Added selected option to chapter list
+- Battled with gitignore
 
 ## progress 12.08.2021
 - Search box with filter.includes
