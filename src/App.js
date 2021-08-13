@@ -97,7 +97,8 @@ function App() {
 //Filtering the rules according to ToC
   const filterChapter = (number) => {
     setSelected(number)
-    setDisplay(rules.filter(rules => rules.number.slice(0, 3) == number))
+    if (number >= 100){
+    setDisplay(rules.filter(rules => rules.number.slice(0, 3) == number))}
   }
 
   
