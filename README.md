@@ -1,11 +1,12 @@
 # Personal skill level evaluation via Reaktor pre-assignment
 ### Finished
-Assignment in short, create a web front for Magic The Gathering rules.txt
+Assignment in short, create a web front for Magic The Gathering rules.txt more details at the end of this readme document.
 
 []() [Heroku link](https://mgtrules.herokuapp.com/)
 
 ## To-Do
-- Improve search
+- Improve search speed
+- Improve search accuracy (Have exact matches on top)
 - Add hyperlinks into rules
 
 ## Finished 13.08.2021
